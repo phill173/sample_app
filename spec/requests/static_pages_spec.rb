@@ -1,18 +1,26 @@
 require 'spec_helper'
 
 describe "StaticPages" do
-  describe "Home Page" do
 
-  	it "Should have the right title" do
-	  	visit '/static_pages/home'
-	  	expect(page).to have_title("PhillNet | Home")
+	let(:base_title) { "PhillNet" }
+
+	describe "Home Page" do
+
+	  	it "Should have the base title" do
+		  	visit '/static_pages/home'
+		  	expect(page).to have_title("PhillNet")
+		end
+
+	    it "Should have the content 'Sample App" do
+	      visit '/static_pages/home'
+	      expect(page).to have_content('Sample App')
+	    end
+
+	    it "should not have the custom title " do
+	    	visit '/static_pages/home'
+	    	expect(page).not_to have_title('| Home')
+	    end
 	end
-
-    it "Should have the content 'Sample App" do
-      visit '/static_pages/home'
-      expect(page).to have_content('Sample App')
-    end
-  end
 
   describe "Help Page" do
 
@@ -43,5 +51,12 @@ describe "StaticPages" do
       expect(page).to have_content('About Us')
     end
   end
+
+  describe "Contact Page"
+
+  	it "Should have the right title" do
+  		visit '/static_pages/contact'
+  		expect(page).to have_title("PhillNet | Contact Us")
+  	end
 
 end
