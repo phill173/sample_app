@@ -1,62 +1,35 @@
 require 'spec_helper'
 
-describe "StaticPages" do
+describe "Static pages" do
 
-	let(:base_title) { "PhillNet" }
+  subject { page }
 
-	describe "Home Page" do
+  describe "Home page" do
+    before { visit root_path }
 
-	  	it "Should have the base title" do
-		  	visit '/static_pages/home'
-		  	expect(page).to have_title("PhillNet")
-		end
-
-	    it "Should have the content 'Sample App" do
-	      visit '/static_pages/home'
-	      expect(page).to have_content('Sample App')
-	    end
-
-	    it "should not have the custom title " do
-	    	visit '/static_pages/home'
-	    	expect(page).not_to have_title('| Home')
-	    end
-	end
-
-  describe "Help Page" do
-
-
-	it "Should have the right title" do
-	  	visit '/static_pages/help'
-	  	expect(page).to have_title("PhillNet | Help")
-	end
-
-
-    it "Should have the content 'Help" do
-      visit '/static_pages/help'
-      expect(page).to have_content('Help')
-    end
+    it { should have_content('PhillNet') }
+    it { should have_title(full_title('')) }
+    it { should_not have_title('| Home') }
   end
 
-  describe "About Page" do
+  describe "Help page" do
+    before { visit help_path }
 
-	it "Should have the right title" do
-	  	visit '/static_pages/about'
-	  	expect(page).to have_title("PhillNet | About")
-	end
-
-
-
-    it "Should have the content 'About Us" do
-      visit '/static_pages/about'
-      expect(page).to have_content('About Us')
-    end
+    it { should have_content('Help') }
+    it { should have_title(full_title('Help')) }
   end
 
-  describe "Contact Page"
+  describe "About page" do
+    before { visit about_path }
 
-  	it "Should have the right title" do
-  		visit '/static_pages/contact'
-  		expect(page).to have_title("PhillNet | Contact Us")
-  	end
+    it { should have_content('About') }
+    it { should have_title(full_title('About Us')) }
+  end
 
+  describe "Contact page" do
+    before { visit contact_path }
+
+    it { should have_content('Contact Us') }
+    it { should have_title(full_title('Contact Us')) }
+  end
 end
