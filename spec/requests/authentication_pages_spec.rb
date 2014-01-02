@@ -89,6 +89,15 @@ describe "AuthenticationPages" do
             it { should have_title('Sign in') }
           end
       end
+
+      describe "in the microposts controller" do
+
+        describe "submitting to the create action" do
+          before { post microposts_path }
+          specify { expect(response).to redirect_to(signin_path) }
+        end
+      end
+
     end
 
       describe "as wrong user" do
